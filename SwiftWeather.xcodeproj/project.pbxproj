@@ -16,6 +16,9 @@
 		605F48C51CAF088A00285BD2 /* CityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F48C41CAF088A00285BD2 /* CityListViewController.swift */; };
 		605F48C71CAF0BE400285BD2 /* CityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F48C61CAF0BE400285BD2 /* CityDetailsViewController.swift */; };
 		605F48C91CAF0BFD00285BD2 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F48C81CAF0BFD00285BD2 /* AddCityViewController.swift */; };
+		605F48CB1CAF11E500285BD2 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F48CA1CAF11E500285BD2 /* PersistanceService.swift */; };
+		605F48CD1CAF1F7600285BD2 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F48CC1CAF1F7600285BD2 /* City.swift */; };
+		605F48CF1CAF206300285BD2 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F48CE1CAF206300285BD2 /* Temperature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		605F48C41CAF088A00285BD2 /* CityListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListViewController.swift; sourceTree = "<group>"; };
 		605F48C61CAF0BE400285BD2 /* CityDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityDetailsViewController.swift; sourceTree = "<group>"; };
 		605F48C81CAF0BFD00285BD2 /* AddCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		605F48CA1CAF11E500285BD2 /* PersistanceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		605F48CC1CAF1F7600285BD2 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		605F48CE1CAF206300285BD2 /* Temperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,7 @@
 		605F48BE1CAF060500285BD2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				605F48CE1CAF206300285BD2 /* Temperature.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 		605F48C01CAF066200285BD2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				605F48CC1CAF1F7600285BD2 /* City.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -157,6 +165,7 @@
 		605F48C11CAF066800285BD2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				605F48CA1CAF11E500285BD2 /* PersistanceService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -304,8 +313,11 @@
 			files = (
 				605F48C71CAF0BE400285BD2 /* CityDetailsViewController.swift in Sources */,
 				605F48911CAEE33800285BD2 /* AppDelegate.swift in Sources */,
+				605F48CD1CAF1F7600285BD2 /* City.swift in Sources */,
 				605F48C51CAF088A00285BD2 /* CityListViewController.swift in Sources */,
 				605F48C91CAF0BFD00285BD2 /* AddCityViewController.swift in Sources */,
+				605F48CF1CAF206300285BD2 /* Temperature.swift in Sources */,
+				605F48CB1CAF11E500285BD2 /* PersistanceService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
