@@ -20,6 +20,7 @@ class WeatherService {
         
         let weatherRequestString = (WeatherServiceConst.WEATHER_API_URL + cityName) as NSString
         let weatherApiUrl = NSURL(string: weatherRequestString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())! as String)
+        
         let task = NSURLSession.sharedSession().dataTaskWithURL(weatherApiUrl!) {
             (data, response, error) in
             do {

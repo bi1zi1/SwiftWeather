@@ -16,7 +16,8 @@ class CityListViewController: UITableViewController {
     
     @IBOutlet weak var rightBarButton: UIBarButtonItem?
     
-    var persistanceService: PersistanceService = PersistanceService()
+    let persistanceService: PersistanceService = PersistanceService()
+    let weatherService: WeatherService = WeatherService()
     var cities: [City] = []
 
     override func loadView() {
@@ -26,11 +27,29 @@ class CityListViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CityDetailsViewController.dataChanged), name: PersistanceServiceConst.kDataChanged, object: nil)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.reloadWeatherData()
+    }
+    
     func dataChanged() {
         self.cities = self.persistanceService.fetchCities()
         dispatch_async(dispatch_get_main_queue()) {
             self.tableView.reloadData()
         }
+    }
+    
+    func reloadWeatherData() {
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(500 * Double(USEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue(), {
+            //fetch fresh data for each city
+            for oneCity in self.cities
+            {
+                self.weatherService.weatherForCity(oneCity.name, completionClosure: {(city: City)  in
+                    self.persistanceService.addOrUpdateCity(city)
+                })
+            }
+        })
     }
 
     //MARK: - UITableView
