@@ -65,9 +65,18 @@ class CityListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CityCell", forIndexPath: indexPath)
         let city = self.cities[indexPath.row]
-        cell.textLabel!.text = String(format: "%@",city.name)
+        var temp = 0.0
+        if city.temp != nil {
+            temp = (city.temp?.celsius)!
+        }
+        cell.textLabel!.text = String(format: "%00.0f°C | %@", city.name, temp)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80.0
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
