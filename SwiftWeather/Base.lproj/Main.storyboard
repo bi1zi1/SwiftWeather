@@ -31,15 +31,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="City List" id="bqx-oS-TDp">
-                        <barButtonItem key="rightBarButtonItem" width="20" style="plain" id="mho-PZ-cog">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4ot-Iz-F78">
-                                <rect key="frame" x="560" y="7" width="20" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+"/>
-                                <connections>
-                                    <segue destination="TCJ-QC-9TD" kind="presentation" id="bYM-AD-Nfx"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mho-PZ-cog">
+                            <connections>
+                                <segue destination="TCJ-QC-9TD" kind="presentation" id="mBk-na-pWC"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="leN-ga-c5f">
