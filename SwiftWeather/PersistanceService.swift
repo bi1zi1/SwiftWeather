@@ -46,10 +46,12 @@ class PersistanceService {
     
     func addOrUpdateCity(city: City) {
         var cities = self.fetchCities()
+        var cityix = 0
         if let loccity = cities.filter({$0.name == city.name}).first {
-            cities.removeAtIndex(cities.indexOf(loccity)!)
+            cityix = cities.indexOf(loccity)!
+            cities.removeAtIndex(cityix)
         }
-        cities.append(city)
+        cities.insert(city, atIndex: cityix)
         self.storeCities(cities)
     }
     

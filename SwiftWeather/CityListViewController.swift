@@ -30,6 +30,7 @@ class CityListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reloadWeatherData()
+        self.refreshControl?.addTarget(self, action: #selector(CityListViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     func dataChanged() {
@@ -37,6 +38,11 @@ class CityListViewController: UITableViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.tableView.reloadData()
         }
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.reloadWeatherData()
+        refreshControl.endRefreshing()
     }
     
     func reloadWeatherData() {
