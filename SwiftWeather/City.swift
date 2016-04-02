@@ -41,17 +41,17 @@ class City: NSObject, NSCoding {
         if let temp = aDecoder.decodeObjectForKey(CoderConst.kCoderTemp) as? Temperature {
             self.temp = temp
         } else {
-            self.temp = Temperature()
+            self.temp = nil
         }
         if let humidity = aDecoder.decodeObjectForKey(CoderConst.kCoderHumidity) as? Double {
             self.humidity = humidity
         } else {
-            self.humidity = 0.0
+            self.humidity = nil
         }
         if let weatherDescription = aDecoder.decodeObjectForKey(CoderConst.kCoderWeatherDescription) as? String {
             self.weatherDescription = weatherDescription
         } else {
-            self.weatherDescription = ""
+            self.weatherDescription = nil
         }
     }
     

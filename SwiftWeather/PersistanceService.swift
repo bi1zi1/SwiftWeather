@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct PersistanceServiceConst {
+    static var kDataChanged = "kDataChanged"
+}
+
 class PersistanceService {
     //# MARK: - Private Methods
 
@@ -29,9 +33,31 @@ class PersistanceService {
         return [City]()
     }
     
+    func fetchCityDataForName(cityName: String) -> City {
+        let cities = self.fetchCities()
+        if let loccity = cities.filter({$0.name == cityName}).first {
+            return loccity
+        }
+        
+        let loccity = City()
+        loccity.name = cityName
+        return loccity
+    }
+    
+    func addOrUpdateCity(city: City) {
+        var cities = self.fetchCities()
+        if let loccity = cities.filter({$0.name == city.name}).first {
+            cities.removeAtIndex(cities.indexOf(loccity)!)
+        }
+        cities.append(city)
+        self.storeCities(cities)
+    }
+    
     //Save all the cities and overwrite current content
     func storeCities(cities: [City]) {
-        NSKeyedArchiver.archiveRootObject(cities, toFile: self.dbPath())
+        NSKeyedArchiver.archiveRootObject(cities, toFile: self.dbPath())    
+        NSNotificationCenter.defaultCenter().postNotificationName(PersistanceServiceConst.kDataChanged, object: nil)
+
     }
     
     //Clear all the saved cities
