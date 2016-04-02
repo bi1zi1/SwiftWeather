@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dRn-pl-4Ay">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityCell" id="dRn-pl-4Ay">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dRn-pl-4Ay" id="eLm-4W-dZX">
@@ -30,10 +30,20 @@
                             <outlet property="delegate" destination="NqW-Ov-btY" id="FLd-Ux-wdo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="bqx-oS-TDp"/>
+                    <navigationItem key="navigationItem" title="City List" id="bqx-oS-TDp">
+                        <barButtonItem key="rightBarButtonItem" width="20" style="plain" id="mho-PZ-cog">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4ot-Iz-F78">
+                                <rect key="frame" x="560" y="7" width="20" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <segue destination="TCJ-QC-9TD" kind="presentation" id="bYM-AD-Nfx"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <segue destination="uZw-Af-Li4" kind="showDetail" id="cAN-5Z-htV"/>
-                        <segue destination="TCJ-QC-9TD" kind="presentation" id="VTO-Sd-cBb"/>
+                        <segue destination="7K2-fE-KZ3" kind="show" identifier="showCityDetails" id="fMd-ye-DdW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5og-3Q-1gi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -60,10 +70,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puS-2o-kS6" userLabel="Add City">
                                 <rect key="frame" x="180" y="90" width="59" height="30"/>
                                 <state key="normal" title="Add City"/>
+                                <connections>
+                                    <action selector="addCity:" destination="TCJ-QC-9TD" eventType="touchUpInside" id="MeG-dh-1Ic"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toJ-O0-hDn">
                                 <rect key="frame" x="372" y="90" width="48" height="30"/>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="closeScreen:" destination="TCJ-QC-9TD" eventType="touchUpInside" id="rDM-Ih-KOn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,26 +93,13 @@
                             <constraint firstItem="tmf-i3-8rd" firstAttribute="top" secondItem="Cwm-GT-6HQ" secondAttribute="bottom" constant="20" id="u7U-na-lGI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cityName" destination="tmf-i3-8rd" id="eyM-Jl-xRp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZU-VU-xfL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1545" y="2304"/>
-        </scene>
-        <!--City Details Nav-->
-        <scene sceneID="ZTj-zZ-kAb">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pyi-i5-Vto" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="uZw-Af-Li4" userLabel="City Details Nav" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l7Z-UI-4oa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="7K2-fE-KZ3" kind="relationship" relationship="rootViewController" id="MUv-d0-R2A"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-799" y="1549"/>
+            <point key="canvasLocation" x="-1545" y="2286"/>
         </scene>
         <!--City Details View-->
         <scene sceneID="Onu-qi-txE">
@@ -163,16 +166,20 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Khx-0b-3NO"/>
+                    <navigationItem key="navigationItem" title="City" id="Khx-0b-3NO"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="mVI-B8-jlD" id="LgC-mR-vYq"/>
+                        <outlet property="humidityLabel" destination="ZcZ-bJ-eVU" id="SHm-25-JVq"/>
+                        <outlet property="temperatureLabel" destination="oRP-RM-gbN" id="GWU-Oh-hmJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdz-1D-GtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-71" y="1549"/>
+            <point key="canvasLocation" x="-825" y="1549"/>
         </scene>
         <!--City List Nav-->
         <scene sceneID="WBH-mq-4gp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RJP-hM-lWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="YkM-ga-w4J" userLabel="City List Nav" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="p6U-ug-xvP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -182,6 +189,7 @@
                         <segue destination="NqW-Ov-btY" kind="relationship" relationship="rootViewController" id="FEu-Rf-eH8"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RJP-hM-lWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1545" y="803"/>
         </scene>
