@@ -25,6 +25,13 @@ class CityListViewController: UITableViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CityDetailsViewController.dataChanged), name: PersistanceServiceConst.kDataChanged, object: nil)
     }
+    
+    func dataChanged() {
+        self.cities = self.persistanceService.fetchCities()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
+    }
 
     //MARK: - UITableView
     
@@ -33,12 +40,12 @@ class CityListViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return self.cities.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CityCell", forIndexPath: indexPath)
-        let city = cities[indexPath.row]
+        let city = self.cities[indexPath.row]
         cell.textLabel!.text = String(format: "%@",city.name)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
@@ -48,18 +55,26 @@ class CityListViewController: UITableViewController {
         performSegueWithIdentifier(CityListSeagueConst.kShowCityDetails, sender: self.cities[indexPath.row])
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let deleteCityName = self.cities[indexPath.row].name;
+            self.cities.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.persistanceService.deleteCity(deleteCityName)
+        }
+    }
+    
+    //MARK: - Segue
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == CityListSeagueConst.kShowCityDetails {
             let city = sender as! City
             let cityDetailsVC = segue.destinationViewController as! CityDetailsViewController
             cityDetailsVC.city = city
-        }
-    }
-    
-    func dataChanged() {
-        self.cities = self.persistanceService.fetchCities()
-        dispatch_async(dispatch_get_main_queue()) {
-            self.tableView.reloadData()
         }
     }
 }

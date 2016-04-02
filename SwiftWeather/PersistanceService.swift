@@ -60,6 +60,14 @@ class PersistanceService {
 
     }
     
+    func deleteCity(cityName: String) {
+        var cities = self.fetchCities()
+        if let loccity = cities.filter({$0.name == cityName}).first {
+            cities.removeAtIndex(cities.indexOf(loccity)!)
+        }
+        self.storeCities(cities)
+    }
+    
     //Clear all the saved cities
     func deleteAllCities() {
         self.storeCities([])

@@ -44,9 +44,6 @@ class WeatherService {
                     }
                 }
                 
-                if let name = JSONDictionary["name"] as? String {
-                    city.name = name;
-                }
                 completionClosure(city)
             }
             catch let JSONError as NSError {
